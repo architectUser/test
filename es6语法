@@ -135,4 +135,8 @@ for(let [key,value] of map) {
  s.endsWidth('!', 5); // true
  s.includes('o', 6);// true
  
+ 在使用第二个参数时，endsWith的行为与其他两个方法有所不同。它针对前n个字符，而其他两个方法针对从第
+ n个位置到字符串结束位置之间的字符
+ 
+ 
  
