@@ -42,19 +42,87 @@ const不是指变量的值不得改动，而是变量指向的内存地址不得
 保存的只是一个指针，const只能保证这个指针是固定的，至于它指向的数据结构是不是可变的，这完全不能控制。因此，将一个
 对象声明为常量时必须小心。
 
+eg： const foo={};
+foo.prop = 123; //对
+foo = {}; //typeError： ‘foo’ is read-only
+因为：常量foo储存的是一个地址，这个地址指向一个对象。不可变的只是这个地址，既不能把foo指向另一个地址，
+但对象本身是不可变，所以依然可以为其添加新属性
+举个例子：标签可以添加新属性值，但是不能改标签的类型。不然就不一样啦
+eg：
+const a = [];
+a.push('hello');//可执行
+a.length = 0;//可执行
+a = ['Dave'];//报错
+
+对象冻结：object.freeze
+const foo = Object.freeze({});
+foo.prop = 123;//报错
+
+
+将一个对象彻底冻结的函数：
+var constantize = （obj） => {
+  Object.freeze(obj);
+  Object.key(obj).forEach((key,i) => {
+   if(typeof obj[key] === 'object') {
+    constantize(obj[key]);
+   }
+  }
+}
+
+(6)es6声明变量的6种方法：
+var function let const import class
+
+(7)顶层对象的属性
+顶层对象在浏览器环境中指window对象，在node环境指global对象
+es5:顶层对象的属性与全局变量是等价的
+造成的问题
+1.无法在编译时就提示变量未声明的错误，只有运行时才能知道
+（全局变量可能是顶层对象的属性创造的，而属性的创造是动态的）
+2.程序员很容易不知不觉地就创建全局变量
+3.顶层对象的属性到处读写的，不利于模块化编程
+4.window对象有实体意义，指的是浏览器的窗口对象
+所以从es6开始，全局变量将逐步与顶层对象的属性隔离
+
+（8）global对象
+1.在浏览器中，顶层对象是window，但Node和Web Worker没有window。
+2.在浏览器和web worker中，self也指向顶层对象，但Node和self。
+3.在Node中，顶层对象是global，但其他环境不支持。
+4.在全局环境中，this会返回顶层对象。但是，在Node模块和es6模块中，this返回的当前模块。
+5.对于函数中的this，如果函数不是作为对象的方法运行，this会指向顶层对象。但是，
+严格模式下，this会返回undefined。
+6.不管是严格模式，还是普通模式，总会返回全局对象
 
 
 
+二、变量的解构赋值
+1.交换变量的值
+2.从函数返回多个值
+3.函数参数的定义
+4.提取JSON数据
+5.函数参数的默认值
+6.遍历Map结构
+7.输入模块的指定方法
 
+var map = new Map（）;
+map.set('first', 'hello');
+map.set('second', 'world');
 
-
-
-
-
-
-
-
-
-
-
-
+for(let [key,value] of map) {
+  console.log(key +"is" + value);
+  }
+  
+ // first is hello
+ //second is world
+ 
+ //获取键名
+ for（let [key] of map){
+ 
+ }
+ 
+ //获取键值
+ for（let [,value] of map) {
+ }
+ 
+ 三、字符串的扩展
+ var s = 'Hello World!';
+ s.startsWith('Hello');//tr
