@@ -125,4 +125,14 @@ for(let [key,value] of map) {
  
  三、字符串的扩展
  var s = 'Hello World!';
- s.startsWith('Hello');//tr
+ s.startsWith('Hello');//true
+ s.endsWidth('!'); // true
+ s.includes('o');// true
+ 
+ 
+  var s = 'Hello World!';
+ s.startsWith('Hello', 6);//true
+ s.endsWidth('!', 5); // true
+ s.includes('o', 6);// true
+ 
+ 
