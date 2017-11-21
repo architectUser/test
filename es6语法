@@ -124,6 +124,7 @@ for(let [key,value] of map) {
  }
  
  三、字符串的扩展
+ (1)startsWith()与EndsWidth()
  var s = 'Hello World!';
  s.startsWith('Hello');//true
  s.endsWidth('!'); // true
@@ -138,5 +139,54 @@ for(let [key,value] of map) {
  在使用第二个参数时，endsWith的行为与其他两个方法有所不同。它针对前n个字符，而其他两个方法针对从第
  n个位置到字符串结束位置之间的字符
  
+ (2)repeat()
+ repeat()
+ repeat方法返回一个新字符串，表示将原字符串重复几次
+ 'x'.repeat(3); //'xxx'
+ 1.参数如果是小数，会被取整。
+ 'na'.repeat(2,9)//'nana'
+ 2.如果repeat的参数是负数或者infinity，会报错。
+ 'na'.repeat(Infinity)//rangError
+ 3.如果参数是0到-1之间的小数，则等同于0
+ 4.如果repeat的参数是字符串，则会先转换成数字。
+ 'na'.repeat('3') //'nanana'
  
+ (3)padStart()/padEnd()
+ padStart()用于头部补全，padEnd()用于尾部补全
+ 'x'.padStart(5, 'ab');//'ababx'
+ 'x'.padStart(4, 'ab');//'abax'
  
+ 'x'.padEnd(5, 'ab');//'xabab'
+ 'x'.padEnd(4, 'ab');//'xaxa'
+ 
+ padStart和padEnd分别接受两个参数，第一个参数用来指定字符串的最小长度，第二个参数则是用来补全的字符串。
+ 1.如果原字符串的长度等于或大于指定的最小长度，则返回原字符串
+ 'xxx'.padStart(2, 'ab') //xxx
+ 'xxx'.padEnd(2, 'ab')//xxx
+ 2.如果用来补全的字符串与原字符串的长度之和超过指定的最小长度，则会截取超出位数的补全字符串
+ 'abc'.padStart(10, '0123456789')
+ 3.如果省略第二个参数，则会用空格来补全
+ 'x'.padStart(4) // '   x'
+ 'x'.padEnd(4) // 'x   '
+ 
+用途：
+1.为数值补全指定位数
+2.提示字符串的格式
+'12'.padStart(10, 'YYYY-MM-DD') //'YYYY-MM-12'
+
+(4)模板字符串
+``
+1.普通字符串
+2.多行字符串
+3.字符串中嵌入变量
+var name = "Bob", time = "today";
+`Hello ${name},how are you ${time}?`
+
+去掉换行
+$('#list').html(`
+   <ul>
+    <li>first</li>
+    <li>second</li>
+   </ul>
+`.trim());
+
